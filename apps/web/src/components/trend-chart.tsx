@@ -54,7 +54,9 @@ export function TrendChart({
   const ih = H - M.top - M.bottom;
   const x = (d: string) => M.left + (t1 === t0 ? iw / 2 : ((Date.parse(d) - t0) / (t1 - t0)) * iw);
   const y = (v: number) => M.top + (1 - v / 100) * ih;
-  const ticks = dates.length <= 4 ? dates : [dates[0]!, dates[Math.floor(dates.length / 3)]!, dates[Math.floor((2 * dates.length) / 3)]!, dates.at(-1)!];
+  // Up to 4 date ticks, always keeping the last one, dropping any closer than 70px to a kept neighbour.
+  const candidates = dates.length <= 4 ? dates : [dates[0]!, dates[Math.floor(dates.length / 3)]!, dates[Math.floor((2 * dates.length) / 3)]!, dates.at(-1)!];
+  const ticks = [...new Set(candidates)].reverse().reduce<string[]>((kept, d) => (kept.length && x(kept.at(-1)!) - x(d) < 70 ? kept : [...kept, d]), []).reverse();
 
   // Direct end labels, nudged apart vertically so they don't collide.
   const ends = shown

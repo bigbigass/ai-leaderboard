@@ -43,3 +43,13 @@ describe('thin-page rules', () => {
     expect(isHubIndexable(3)).toBe(true);
   });
 });
+
+describe('data layer fallback', () => {
+  it('recognises wrapped connection / missing-schema errors', async () => {
+    const { isConnectionError } = await import('@/lib/data');
+    const wrapped = Object.assign(new Error('Failed query: select 1'), { cause: Object.assign(new Error('write CONNECT_TIMEOUT 10.0.0.1:5432'), { code: 'CONNECT_TIMEOUT' }) });
+    expect(isConnectionError(wrapped)).toBe(true);
+    expect(isConnectionError(Object.assign(new Error('Failed query'), { cause: { code: '42P01', message: 'relation "models" does not exist' } }))).toBe(true);
+    expect(isConnectionError(new Error('syntax error at or near "asc"'))).toBe(false);
+  });
+});

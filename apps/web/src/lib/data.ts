@@ -22,7 +22,7 @@ function cachedRead<A extends unknown[], R>(key: string, fn: (db: ReturnType<typ
     } catch (err) {
       if (isConnectionError(err)) {
         dbDown = true;
-        console.warn(`[data] database unreachable, rendering without data (${(err as Error).message})`);
+        console.warn(`[data] database unavailable, rendering without data (${rootMessage(err)})`);
         return fallback;
       }
       throw err;
@@ -30,13 +30,20 @@ function cachedRead<A extends unknown[], R>(key: string, fn: (db: ReturnType<typ
   };
 }
 
-function isConnectionError(err: unknown): boolean {
-  const e = err as { code?: string; message?: string } | null;
-  const code = e?.code ?? '';
-  return (
-    ['ECONNREFUSED', 'ENOTFOUND', 'ETIMEDOUT', 'CONNECT_TIMEOUT', 'EAI_AGAIN', '3D000', '28P01', '42P01'].includes(code) ||
-    /connect|timeout|does not exist/i.test(e?.message ?? '')
-  );
+const rootMessage = (err: unknown): string => {
+  let e = err as { message?: string; cause?: unknown };
+  while (e.cause) e = e.cause as typeof e;
+  return String(e.message ?? e).slice(0, 200);
+};
+
+/** Connection/missing-database/missing-schema errors (Drizzle wraps the driver error in `cause`). */
+export function isConnectionError(err: unknown): boolean {
+  for (let e = err as { code?: string; message?: string; cause?: unknown } | null, depth = 0; e && depth < 4; e = e.cause as typeof e, depth++) {
+    const code = String(e.code ?? '');
+    if (['ECONNREFUSED', 'ENOTFOUND', 'ETIMEDOUT', 'ECONNRESET', 'CONNECT_TIMEOUT', 'EAI_AGAIN', '3D000', '28P01', '42P01'].includes(code)) return true;
+    if (/CONNECT_TIMEOUT|ECONNREFUSED|ENOTFOUND|does not exist|DATABASE_URL is not set/i.test(e.message ?? '')) return true;
+  }
+  return false;
 }
 
 export const getModelList = cachedRead('models', (db) => q.getModelList(db), [] as q.ModelListItem[]);

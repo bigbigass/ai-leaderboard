@@ -1,0 +1,65 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: ail_test
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd "pg_isready -U postgres"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+    env:
+      TEST_DATABASE_URL: postgres://postgres:postgres@localhost:5432/ail_test
+      NEXT_TELEMETRY_DISABLED: "1"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm lint
+      - run: pnpm typecheck
+      - run: pnpm test
+      # Build must succeed without a database (pages fall back / render on demand).
+      - name: Build (no database)
+        run: pnpm build
+      # And against a freshly migrated + seeded database (the acceptance baseline).
+      - name: Migrate + seed
+        env:
+          DATABASE_URL: postgres://postgres:postgres@localhost:5432/ail_seeded
+        run: |
+          PGPASSWORD=postgres psql -h localhost -U postgres -c "CREATE DATABASE ail_seeded"
+          pnpm db:migrate
+          pnpm db:seed
+      - name: Build (seeded) + smoke test
+        env:
+          DATABASE_URL: postgres://postgres:postgres@localhost:5432/ail_seeded
+          NEXT_PUBLIC_SITE_URL: http://localhost:3000
+          REVALIDATE_SECRET: ci-secret
+        run: |
+          pnpm build
+          pnpm start > /tmp/next.log 2>&1 &
+          for i in $(seq 1 30); do curl -sf -o /dev/null http://localhost:3000/en && break; sleep 1; done
+          pnpm smoke || (tail -50 /tmp/next.log; exit 1)
