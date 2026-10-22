@@ -1,0 +1,31 @@
+{
+  "name": "ai-leaderboard",
+  "private": true,
+  "packageManager": "pnpm@10.28.0",
+  "engines": { "node": ">=20.11" },
+  "scripts": {
+    "dev": "pnpm --filter @ail/web dev",
+    "build": "pnpm --filter @ail/web build",
+    "start": "pnpm --filter @ail/web start",
+    "lint": "eslint . --max-warnings=0",
+    "typecheck": "pnpm -r --parallel typecheck",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "db:generate": "pnpm --filter @ail/db generate",
+    "db:migrate": "pnpm --filter @ail/db migrate",
+    "db:seed": "pnpm --filter @ail/pipeline seed",
+    "pipeline": "pnpm --filter @ail/pipeline cli",
+    "smoke": "node scripts/smoke.mjs"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.5",
+    "@next/eslint-plugin-next": "15.5.28",
+    "@types/node": "^22.15.0",
+    "eslint": "^9.39.5",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "globals": "^16.0.0",
+    "typescript": "~5.9.3",
+    "typescript-eslint": "^8.46.0",
+    "vitest": "^3.2.7"
+  }
+}

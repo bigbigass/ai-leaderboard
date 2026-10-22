@@ -1,0 +1,21 @@
+Model version,Best score (across scorers),Release date,Organization,Country,Stderr,Source,Source link
+gpt-5-2025-08-07_high,0.25,2025-08-07,OpenAI,United States of America,0.031,Epoch AI,https://epoch.ai/benchmarks
+o3-2025-04-16_high,0.19,2025-04-16,OpenAI,United States of America,0.028,Epoch AI,https://epoch.ai/benchmarks
+gpt-4.1-2025-04-14,0.04,2025-04-14,OpenAI,United States of America,0.014,Epoch AI,https://epoch.ai/benchmarks
+gpt-4o-2024-11-20,0.01,2024-11-20,OpenAI,United States of America,0.007,Epoch AI,https://epoch.ai/benchmarks
+gpt-oss-120b_high,0.1,2025-08-05,OpenAI,United States of America,0.021,Epoch AI,https://epoch.ai/benchmarks
+claude-opus-4-1-20250805_27K,0.07,2025-08-05,Anthropic,United States of America,0.018,Epoch AI,https://epoch.ai/benchmarks
+claude-sonnet-4-20250514,0.05,2025-05-22,Anthropic,United States of America,0.015,Epoch AI,https://epoch.ai/benchmarks
+claude-3-7-sonnet-20250219,0.04,2025-02-24,Anthropic,United States of America,0.014,Epoch AI,https://epoch.ai/benchmarks
+gemini-2.5-pro,0.14,2025-06-17,Google DeepMind,United States of America,0.025,Epoch AI,https://epoch.ai/benchmarks
+gemini-2.5-flash,0.08,2025-06-17,Google DeepMind,United States of America,0.019,Epoch AI,https://epoch.ai/benchmarks
+grok-4-0709,0.21,2025-07-09,xAI,United States of America,0.029,Epoch AI,https://epoch.ai/benchmarks
+grok-3,0.03,2025-02-17,xAI,United States of America,0.012,Epoch AI,https://epoch.ai/benchmarks
+Llama-4-Maverick-17B-128E-Instruct,0.01,2025-04-05,Meta AI,United States of America,0.007,Epoch AI,https://epoch.ai/benchmarks
+DeepSeek-R1-0528,0.08,2025-05-28,DeepSeek,China,0.019,Epoch AI,https://epoch.ai/benchmarks
+DeepSeek-V3.1,0.06,2025-08-21,DeepSeek,China,0.017,Epoch AI,https://epoch.ai/benchmarks
+DeepSeek-V3-0324,0.03,2025-03-24,DeepSeek,China,0.012,Epoch AI,https://epoch.ai/benchmarks
+Qwen3-235B-A22B,0.05,2025-04-29,Alibaba,China,0.015,Epoch AI,https://epoch.ai/benchmarks
+Kimi-K2-Instruct,0.03,2025-07-11,Moonshot,China,0.012,Epoch AI,https://epoch.ai/benchmarks
+GLM-4.5,0.04,2025-07-28,Zhipu AI,China,0.014,Epoch AI,https://epoch.ai/benchmarks
+MiniMax-M1-80k,0.03,2025-06-16,MiniMax,China,0.012,Epoch AI,https://epoch.ai/benchmarks

@@ -1,0 +1,359 @@
+# Canonical models + per-source aliases. THIS FILE IS THE ONLY WAY A RAW NAME GETS MATCHED.
+#
+# Rules (ARCHITECTURE §2.4):
+#   * Same weights = same model. Different weights = different model (deepseek-r1 ≠ deepseek-v3).
+#   * Thinking/reasoning toggles, style control, quantization, provider = a *variant* of the same
+#     model: put it in `variant` (keys: reasoning=on|off|high|low|medium, style_control=on|off,
+#     quant=…, provider=…; join with ';').
+#   * Slug: {family}-{version}[-{size}][-{date}], lowercase, hyphens, no vendor prefix, no preview/exp/latest.
+#   * Matching is exact or normalized-exact (case/whitespace/punctuation) against these aliases only.
+#     The model slug itself is implicitly an alias for every source.
+#   * Fuzzy suggestions land in the review queue (`pnpm pipeline review`); approve by adding a line here,
+#     then run `pnpm pipeline rematch`.
+#
+# source ids: lmarena | epoch | openrouter | livebench | opencompass | superclue | "*" (any)
+
+# ---------------------------------------------------------------- United States / Europe
+- model: gpt-5
+  name: GPT-5
+  vendor: openai
+  family: gpt-5
+  released: 2025-08-07
+  open_weights: false
+  modalities: [text, image]
+  aliases:
+    - { source: lmarena, name: gpt-5-high, variant: reasoning=high }
+    - { source: lmarena, name: gpt-5-chat }
+    - { source: epoch, name: gpt-5-2025-08-07_high, variant: reasoning=high }
+    - { source: openrouter, name: openai/gpt-5 }
+- model: o3-2025-04-16
+  name: o3
+  vendor: openai
+  family: o3
+  released: 2025-04-16
+  open_weights: false
+  modalities: [text, image]
+  aliases:
+    - { source: lmarena, name: o3-2025-04-16 }
+    - { source: epoch, name: o3-2025-04-16_high, variant: reasoning=high }
+    - { source: openrouter, name: openai/o3 }
+- model: gpt-4-1-2025-04-14
+  name: GPT-4.1
+  vendor: openai
+  family: gpt-4.1
+  released: 2025-04-14
+  open_weights: false
+  modalities: [text, image]
+  aliases:
+    - { source: lmarena, name: gpt-4.1-2025-04-14 }
+    - { source: epoch, name: gpt-4.1-2025-04-14 }
+    - { source: openrouter, name: openai/gpt-4.1 }
+- model: gpt-4o-2024-11-20
+  name: GPT-4o (2024-11-20)
+  vendor: openai
+  family: gpt-4o
+  released: 2024-11-20
+  open_weights: false
+  modalities: [text, image]
+  aliases:
+    - { source: lmarena, name: gpt-4o-2024-11-20 }
+    - { source: epoch, name: gpt-4o-2024-11-20 }
+    - { source: openrouter, name: openai/gpt-4o-2024-11-20 }
+- model: gpt-oss-120b
+  name: gpt-oss-120b
+  vendor: openai
+  family: gpt-oss
+  released: 2025-08-05
+  open_weights: true
+  license: Apache-2.0
+  params: { total: 117, active: 5.1 }
+  aliases:
+    - { source: lmarena, name: gpt-oss-120b }
+    - { source: epoch, name: gpt-oss-120b_high, variant: reasoning=high }
+    - { source: openrouter, name: openai/gpt-oss-120b }
+- model: claude-opus-4-1-20250805
+  name: Claude Opus 4.1
+  vendor: anthropic
+  family: claude-opus-4
+  released: 2025-08-05
+  open_weights: false
+  modalities: [text, image]
+  aliases:
+    - { source: lmarena, name: claude-opus-4-1-20250805 }
+    - { source: lmarena, name: claude-opus-4-1-20250805-thinking-16k, variant: reasoning=on }
+    - { source: epoch, name: claude-opus-4-1-20250805_27K, variant: reasoning=on }
+    - { source: openrouter, name: anthropic/claude-opus-4.1 }
+- model: claude-sonnet-4-20250514
+  name: Claude Sonnet 4
+  vendor: anthropic
+  family: claude-sonnet-4
+  released: 2025-05-22
+  open_weights: false
+  modalities: [text, image]
+  aliases:
+    - { source: lmarena, name: claude-sonnet-4-20250514 }
+    - { source: lmarena, name: claude-sonnet-4-20250514-thinking-32k, variant: reasoning=on }
+    - { source: epoch, name: claude-sonnet-4-20250514 }
+    - { source: openrouter, name: anthropic/claude-sonnet-4 }
+- model: claude-3-7-sonnet-20250219
+  name: Claude 3.7 Sonnet
+  vendor: anthropic
+  family: claude-3.7-sonnet
+  released: 2025-02-24
+  open_weights: false
+  modalities: [text, image]
+  aliases:
+    - { source: lmarena, name: claude-3-7-sonnet-20250219 }
+    - { source: epoch, name: claude-3-7-sonnet-20250219 }
+    - { source: openrouter, name: anthropic/claude-3.7-sonnet }
+- model: gemini-2-5-pro
+  name: Gemini 2.5 Pro
+  vendor: google
+  family: gemini-2.5
+  released: 2025-06-17
+  open_weights: false
+  modalities: [text, image, audio, video]
+  aliases:
+    - { source: lmarena, name: gemini-2.5-pro }
+    - { source: epoch, name: gemini-2.5-pro }
+    - { source: openrouter, name: google/gemini-2.5-pro }
+- model: gemini-2-5-flash
+  name: Gemini 2.5 Flash
+  vendor: google
+  family: gemini-2.5
+  released: 2025-06-17
+  open_weights: false
+  modalities: [text, image, audio, video]
+  aliases:
+    - { source: lmarena, name: gemini-2.5-flash }
+    - { source: epoch, name: gemini-2.5-flash }
+    - { source: openrouter, name: google/gemini-2.5-flash }
+- model: gemma-3-27b
+  name: Gemma 3 27B
+  vendor: google
+  family: gemma-3
+  released: 2025-03-12
+  open_weights: true
+  license: Gemma Terms of Use
+  params: { total: 27 }
+  modalities: [text, image]
+  aliases:
+    - { source: lmarena, name: gemma-3-27b-it }
+    - { source: openrouter, name: google/gemma-3-27b-it }
+- model: grok-4-0709
+  name: Grok 4
+  vendor: xai
+  family: grok-4
+  released: 2025-07-09
+  open_weights: false
+  modalities: [text, image]
+  aliases:
+    - { source: lmarena, name: grok-4-0709 }
+    - { source: epoch, name: grok-4-0709 }
+    - { source: openrouter, name: x-ai/grok-4 }
+- model: grok-3
+  name: Grok 3
+  vendor: xai
+  family: grok-3
+  released: 2025-02-17
+  open_weights: false
+  aliases:
+    - { source: lmarena, name: grok-3-preview-02-24 }
+    - { source: epoch, name: grok-3 }
+    - { source: openrouter, name: x-ai/grok-3 }
+- model: llama-4-maverick-17b-128e
+  name: Llama 4 Maverick
+  vendor: meta
+  family: llama-4
+  released: 2025-04-05
+  open_weights: true
+  license: Llama 4 Community License
+  params: { total: 400, active: 17 }
+  modalities: [text, image]
+  aliases:
+    - { source: lmarena, name: llama-4-maverick-17b-128e-instruct }
+    - { source: epoch, name: Llama-4-Maverick-17B-128E-Instruct }
+    - { source: openrouter, name: meta-llama/llama-4-maverick }
+- model: llama-3-1-405b
+  name: Llama 3.1 405B
+  vendor: meta
+  family: llama-3.1
+  released: 2024-07-23
+  open_weights: true
+  license: Llama 3.1 Community License
+  params: { total: 405 }
+  aliases:
+    - { source: lmarena, name: llama-3.1-405b-instruct-bf16 }
+    - { source: epoch, name: Llama-3.1-405B-Instruct }
+    - { source: openrouter, name: meta-llama/llama-3.1-405b-instruct }
+- model: mistral-medium-2505
+  name: Mistral Medium 3
+  vendor: mistral
+  family: mistral-medium-3
+  released: 2025-05-07
+  open_weights: false
+  modalities: [text, image]
+  aliases:
+    - { source: lmarena, name: mistral-medium-2505 }
+    - { source: openrouter, name: mistralai/mistral-medium-3 }
+- model: mistral-large-2411
+  name: Mistral Large (2411)
+  vendor: mistral
+  family: mistral-large-2
+  released: 2024-11-18
+  open_weights: true
+  license: Mistral Research License
+  params: { total: 123 }
+  aliases:
+    - { source: lmarena, name: mistral-large-2411 }
+    - { source: epoch, name: mistral-large-2411 }
+
+# ---------------------------------------------------------------- China
+- model: deepseek-v3-0324
+  name: DeepSeek V3 (0324)
+  vendor: deepseek
+  family: deepseek-v3
+  released: 2025-03-24
+  open_weights: true
+  license: MIT
+  params: { total: 671, active: 37 }
+  aliases:
+    - { source: lmarena, name: deepseek-v3-0324 }
+    - { source: epoch, name: DeepSeek-V3-0324 }
+    - { source: openrouter, name: deepseek/deepseek-chat-v3-0324 }
+- model: deepseek-r1-0528
+  name: DeepSeek R1 (0528)
+  vendor: deepseek
+  family: deepseek-r1
+  released: 2025-05-28
+  open_weights: true
+  license: MIT
+  params: { total: 671, active: 37 }
+  aliases:
+    - { source: lmarena, name: deepseek-r1-0528 }
+    - { source: epoch, name: DeepSeek-R1-0528 }
+    - { source: openrouter, name: deepseek/deepseek-r1-0528 }
+- model: deepseek-v3-1
+  name: DeepSeek V3.1
+  vendor: deepseek
+  family: deepseek-v3
+  released: 2025-08-21
+  open_weights: true
+  license: MIT
+  params: { total: 671, active: 37 }
+  aliases:
+    - { source: lmarena, name: deepseek-v3.1 }
+    - { source: lmarena, name: deepseek-v3.1-thinking, variant: reasoning=on }
+    - { source: epoch, name: DeepSeek-V3.1 }
+    - { source: openrouter, name: deepseek/deepseek-chat-v3.1 }
+- model: qwen3-235b-a22b
+  name: Qwen3 235B A22B
+  vendor: alibaba
+  family: qwen3
+  released: 2025-04-29
+  open_weights: true
+  license: Apache-2.0
+  params: { total: 235, active: 22 }
+  aliases:
+    - { source: lmarena, name: qwen3-235b-a22b }
+    - { source: lmarena, name: qwen3-235b-a22b-no-thinking, variant: reasoning=off }
+    - { source: epoch, name: Qwen3-235B-A22B }
+    - { source: openrouter, name: qwen/qwen3-235b-a22b }
+- model: qwen3-coder-480b-a35b
+  name: Qwen3 Coder 480B A35B
+  vendor: alibaba
+  family: qwen3-coder
+  released: 2025-07-22
+  open_weights: true
+  license: Apache-2.0
+  params: { total: 480, active: 35 }
+  aliases:
+    - { source: lmarena, name: qwen3-coder-480b-a35b-instruct }
+    - { source: epoch, name: Qwen3-Coder-480B-A35B-Instruct }
+    - { source: openrouter, name: qwen/qwen3-coder }
+- model: qwen2-5-max
+  name: Qwen2.5 Max
+  vendor: alibaba
+  family: qwen2.5
+  released: 2025-01-28
+  open_weights: false
+  aliases:
+    - { source: lmarena, name: qwen2.5-max }
+    - { source: epoch, name: qwen-max-2025-01-25 }
+    - { source: openrouter, name: qwen/qwen-max }
+- model: kimi-k2-0711
+  name: Kimi K2 (0711)
+  vendor: moonshot
+  family: kimi-k2
+  released: 2025-07-11
+  open_weights: true
+  license: Modified MIT
+  params: { total: 1000, active: 32 }
+  aliases:
+    - { source: lmarena, name: kimi-k2-0711-preview }
+    - { source: epoch, name: Kimi-K2-Instruct }
+    - { source: openrouter, name: moonshotai/kimi-k2 }
+- model: glm-4-5
+  name: GLM-4.5
+  vendor: zhipu
+  family: glm-4.5
+  released: 2025-07-28
+  open_weights: true
+  license: MIT
+  params: { total: 355, active: 32 }
+  aliases:
+    - { source: lmarena, name: glm-4.5 }
+    - { source: epoch, name: GLM-4.5 }
+    - { source: openrouter, name: z-ai/glm-4.5 }
+- model: doubao-seed-1-6
+  name: Doubao Seed 1.6
+  vendor: bytedance
+  family: doubao-seed
+  released: 2025-06-11
+  open_weights: false
+  modalities: [text, image, video]
+  aliases:
+    - { source: lmarena, name: doubao-seed-1.6 }
+    - { source: lmarena, name: doubao-seed-1.6-thinking, variant: reasoning=on }
+- model: minimax-m1
+  name: MiniMax-M1
+  vendor: minimax
+  family: minimax-m1
+  released: 2025-06-16
+  open_weights: true
+  license: Apache-2.0
+  params: { total: 456, active: 45.9 }
+  aliases:
+    - { source: lmarena, name: minimax-m1 }
+    - { source: epoch, name: MiniMax-M1-80k }
+    - { source: openrouter, name: minimax/minimax-m1 }
+- model: hunyuan-turbos-20250416
+  name: Hunyuan TurboS (2025-04-16)
+  vendor: tencent
+  family: hunyuan-turbos
+  released: 2025-04-16
+  open_weights: false
+  aliases:
+    - { source: lmarena, name: hunyuan-turbos-20250416 }
+- model: step-3
+  name: Step 3
+  vendor: stepfun
+  family: step-3
+  released: 2025-07-31
+  open_weights: true
+  license: Apache-2.0
+  params: { total: 321, active: 38 }
+  modalities: [text, image]
+  aliases:
+    - { source: lmarena, name: step-3 }
+- model: ernie-4-5-300b-a47b
+  name: ERNIE 4.5 300B A47B
+  vendor: baidu
+  family: ernie-4.5
+  released: 2025-06-30
+  open_weights: true
+  license: Apache-2.0
+  params: { total: 300, active: 47 }
+  aliases:
+    - { source: lmarena, name: ernie-4.5-300b-a47b }
+    - { source: openrouter, name: baidu/ernie-4.5-300b-a47b }

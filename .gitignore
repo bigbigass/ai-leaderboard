@@ -1,0 +1,13 @@
+node_modules/
+.next/
+out/
+dist/
+coverage/
+*.tsbuildinfo
+.env
+.env.local
+.env*.local
+pipeline/out/
+!pipeline/out/.gitkeep
+.vercel
+next-env.d.ts

@@ -1,0 +1,25 @@
+{
+  "name": "@ail/pipeline",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "cli": "tsx cli.ts",
+    "seed": "tsx cli.ts seed",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@ail/db": "workspace:*",
+    "drizzle-orm": "^0.44.7",
+    "fflate": "^0.8.2",
+    "hyparquet": "^1.20.0",
+    "papaparse": "^5.5.3",
+    "yaml": "^2.8.1",
+    "zod": "^4.1.12"
+  },
+  "devDependencies": {
+    "@types/papaparse": "^5.3.16",
+    "hyparquet-writer": "^0.6.0",
+    "tsx": "^4.20.6"
+  }
+}

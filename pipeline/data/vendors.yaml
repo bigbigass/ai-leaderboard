@@ -1,0 +1,16 @@
+# Vendors. `country` (ISO 3166-1 alpha-2) drives the China / global split.
+- { slug: openai, name: OpenAI, country: US, website: "https://openai.com" }
+- { slug: anthropic, name: Anthropic, country: US, website: "https://www.anthropic.com" }
+- { slug: google, name: Google, country: US, website: "https://deepmind.google" }
+- { slug: xai, name: xAI, country: US, website: "https://x.ai" }
+- { slug: meta, name: Meta, country: US, website: "https://ai.meta.com" }
+- { slug: mistral, name: Mistral AI, country: FR, website: "https://mistral.ai" }
+- { slug: deepseek, name: DeepSeek, country: CN, website: "https://www.deepseek.com" }
+- { slug: alibaba, name: Alibaba (Qwen), country: CN, website: "https://qwenlm.github.io" }
+- { slug: moonshot, name: Moonshot AI, country: CN, website: "https://www.moonshot.ai" }
+- { slug: zhipu, name: Zhipu AI (Z.ai), country: CN, website: "https://z.ai" }
+- { slug: bytedance, name: ByteDance (Doubao), country: CN, website: "https://seed.bytedance.com" }
+- { slug: minimax, name: MiniMax, country: CN, website: "https://www.minimax.io" }
+- { slug: tencent, name: Tencent (Hunyuan), country: CN, website: "https://hunyuan.tencent.com" }
+- { slug: stepfun, name: StepFun, country: CN, website: "https://www.stepfun.com" }
+- { slug: baidu, name: Baidu (ERNIE), country: CN, website: "https://yiyan.baidu.com" }
