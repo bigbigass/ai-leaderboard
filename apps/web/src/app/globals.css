@@ -1,0 +1,87 @@
+@import "tailwindcss";
+
+/* shadcn/ui-style tokens (neutral) + chart series slots (validated reference palette). */
+:root {
+  --background: #fcfcfb;
+  --foreground: #0b0b0b;
+  --card: #ffffff;
+  --card-foreground: #0b0b0b;
+  --muted: #f3f3f1;
+  --muted-foreground: #52514e;
+  --border: #e4e4e0;
+  --primary: #1f2937;
+  --primary-foreground: #fafafa;
+  --accent: #eef4fd;
+  --accent-foreground: #0b3d78;
+  --highlight: #fff7e6;
+  --warn: #9a4b00;
+  --warn-bg: #fff1e0;
+  --good: #0f6b2d;
+  --bad: #b42318;
+  --series-1: #2a78d6;
+  --series-2: #eb6834;
+  --series-3: #1baf7a;
+  --series-4: #eda100;
+  --series-5: #e87ba4;
+  --series-6: #008300;
+  --series-7: #6250d6;
+  --series-8: #e34948;
+  --grid: #e4e4e0;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:where(:not([data-theme="light"])) {
+    --background: #121211;
+    --foreground: #f0efec;
+    --card: #1a1a19;
+    --card-foreground: #f0efec;
+    --muted: #232321;
+    --muted-foreground: #c3c2b7;
+    --border: #33332f;
+    --primary: #f0efec;
+    --primary-foreground: #121211;
+    --accent: #13253d;
+    --accent-foreground: #b9d6fb;
+    --highlight: #2a2213;
+    --warn: #ffb35c;
+    --warn-bg: #2d1f0e;
+    --good: #6fd98f;
+    --bad: #ff8a80;
+    --series-1: #3987e5;
+    --series-2: #d95926;
+    --series-3: #199e70;
+    --series-4: #c98500;
+    --series-5: #d55181;
+    --series-6: #008300;
+    --series-7: #9085e9;
+    --series-8: #e66767;
+    --grid: #33332f;
+    color-scheme: dark;
+  }
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-highlight: var(--highlight);
+  --color-warn: var(--warn);
+  --color-warn-bg: var(--warn-bg);
+  --color-good: var(--good);
+  --color-bad: var(--bad);
+  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", "PingFang SC", "Hiragino Sans", "Noto Sans CJK SC", sans-serif;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+}
+a { text-underline-offset: 3px; }
