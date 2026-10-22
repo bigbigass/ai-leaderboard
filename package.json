@@ -2,7 +2,9 @@
   "name": "ai-leaderboard",
   "private": true,
   "packageManager": "pnpm@10.28.0",
-  "engines": { "node": ">=20.11" },
+  "engines": {
+    "node": ">=20.11"
+  },
   "scripts": {
     "dev": "pnpm --filter @ail/web dev",
     "build": "pnpm --filter @ail/web build",
